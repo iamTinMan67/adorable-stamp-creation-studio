@@ -1,12 +1,134 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { StampCanvas } from "@/components/StampCanvas";
+import { StampTemplates } from "@/components/StampTemplates";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Stamp, Sparkles, Palette, Download } from "lucide-react";
+import { toast } from "sonner";
 
 const Index = () => {
+  const [activeTab, setActiveTab] = useState("create");
+
+  const handleTemplateSelect = (template: any) => {
+    toast.success(`Selected ${template.name} template! Switch to Create tab to customize.`);
+    setActiveTab("create");
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/30">
+      {/* Header */}
+      <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+        <div className="container mx-auto px-4 py-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-gradient-primary shadow-stamp">
+                <Stamp className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                  Adorable Stamp Studio
+                </h1>
+                <p className="text-sm text-muted-foreground">Create beautiful custom stamps</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              <div className="hidden sm:flex items-center gap-2 text-sm text-muted-foreground">
+                <Sparkles className="h-4 w-4" />
+                <span>Professional • Creative • Easy</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="container mx-auto px-4 py-8">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
+          <TabsList className="grid w-full grid-cols-2 max-w-md mx-auto">
+            <TabsTrigger value="templates" className="flex items-center gap-2">
+              <Sparkles className="h-4 w-4" />
+              Templates
+            </TabsTrigger>
+            <TabsTrigger value="create" className="flex items-center gap-2">
+              <Palette className="h-4 w-4" />
+              Create
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="templates" className="space-y-8">
+            <div className="text-center space-y-4">
+              <h2 className="text-3xl font-bold">Choose a Template</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Start with one of our professionally designed templates, then customize it to make it your own.
+              </p>
+            </div>
+            <StampTemplates onSelectTemplate={handleTemplateSelect} />
+          </TabsContent>
+
+          <TabsContent value="create" className="space-y-8">
+            <div className="text-center space-y-4">
+              <h2 className="text-3xl font-bold">Create Your Stamp</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Use our powerful canvas editor to design the perfect stamp. Add text, shapes, and customize colors.
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-2">
+                <StampCanvas />
+              </div>
+              
+              <div className="space-y-6">
+                <Card className="border-dashed border-2 border-primary/20">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-primary">
+                      <Download className="h-5 w-5" />
+                      Export Options
+                    </CardTitle>
+                    <CardDescription>
+                      Download your stamp in high quality for printing or digital use.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <Button variant="outline" className="w-full justify-start">
+                      PNG (Transparent)
+                    </Button>
+                    <Button variant="outline" className="w-full justify-start">
+                      PDF (Print Ready)
+                    </Button>
+                    <Button variant="outline" className="w-full justify-start">
+                      SVG (Vector)
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Pro Tips</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2 text-sm text-muted-foreground">
+                    <p>• Use circular borders for traditional stamp looks</p>
+                    <p>• Bold text works best for clarity</p>
+                    <p>• Red and blue are classic stamp colors</p>
+                    <p>• Keep designs simple for better print quality</p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </TabsContent>
+        </Tabs>
+      </main>
+
+      {/* Footer */}
+      <footer className="mt-16 border-t bg-card/30">
+        <div className="container mx-auto px-4 py-8">
+          <div className="text-center text-muted-foreground">
+            <p className="text-sm">Created with ❤️ using Adorable Stamp Studio</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

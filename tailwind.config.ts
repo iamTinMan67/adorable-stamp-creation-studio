@@ -26,7 +26,8 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+					glow: 'hsl(var(--primary-glow))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -52,6 +53,12 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				stamp: {
+					red: 'hsl(var(--stamp-red))',
+					blue: 'hsl(var(--stamp-blue))',
+					green: 'hsl(var(--stamp-green))',
+					purple: 'hsl(var(--stamp-purple))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -67,6 +74,14 @@ export default {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
+			},
+			backgroundImage: {
+				'gradient-primary': 'var(--gradient-primary)',
+				'gradient-stamp': 'var(--gradient-stamp)'
+			},
+			boxShadow: {
+				'stamp': 'var(--shadow-stamp)',
+				'canvas': 'var(--shadow-canvas)'
 			},
 			keyframes: {
 				'accordion-down': {
