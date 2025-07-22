@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { StampCanvas } from "@/components/StampCanvas";
+import { ProfessionalStampCreator } from "@/components/ProfessionalStampCreator";
 import { StampTemplates } from "@/components/StampTemplates";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Stamp, Sparkles, Palette, Download } from "lucide-react";
+import { Stamp, Sparkles, Palette, Download, Settings } from "lucide-react";
 import { toast } from "sonner";
 
 const Index = () => {
-  const [activeTab, setActiveTab] = useState("create");
+  const [activeTab, setActiveTab] = useState("professional");
 
   const handleTemplateSelect = (template: any) => {
     toast.success(`Selected ${template.name} template! Switch to Create tab to customize.`);
@@ -46,14 +47,18 @@ const Index = () => {
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
-          <TabsList className="grid w-full grid-cols-2 max-w-md mx-auto">
+          <TabsList className="grid w-full grid-cols-3 max-w-lg mx-auto">
             <TabsTrigger value="templates" className="flex items-center gap-2">
               <Sparkles className="h-4 w-4" />
               Templates
             </TabsTrigger>
+            <TabsTrigger value="professional" className="flex items-center gap-2">
+              <Settings className="h-4 w-4" />
+              Professional
+            </TabsTrigger>
             <TabsTrigger value="create" className="flex items-center gap-2">
               <Palette className="h-4 w-4" />
-              Create
+              Advanced
             </TabsTrigger>
           </TabsList>
 
@@ -67,11 +72,21 @@ const Index = () => {
             <StampTemplates onSelectTemplate={handleTemplateSelect} />
           </TabsContent>
 
+          <TabsContent value="professional" className="space-y-8">
+            <div className="text-center space-y-4">
+              <h2 className="text-3xl font-bold">Professional Stamp Creator</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Create professional circular stamps with precise control over borders, text, and formatting.
+              </p>
+            </div>
+            <ProfessionalStampCreator />
+          </TabsContent>
+
           <TabsContent value="create" className="space-y-8">
             <div className="text-center space-y-4">
-              <h2 className="text-3xl font-bold">Create Your Stamp</h2>
+              <h2 className="text-3xl font-bold">Advanced Creator</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Use our powerful canvas editor to design the perfect stamp. Add text, shapes, and customize colors.
+                Use our powerful canvas editor to design custom stamps with complete creative freedom.
               </p>
             </div>
 
